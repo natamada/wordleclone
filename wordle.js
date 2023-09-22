@@ -8,6 +8,18 @@ const keys = [
   "Z", "X", "C", "V", "B", "N", "M", "«"
 ];
 
+const numRows = 6;
+const numColumns = 5;
+
+const guesses = [];
+
+for (let row = 0; row < numRows; row++) {
+  guesses[row] = [];
+  for (let column = 0; column < numColumns; column++) {
+    guesses[row][column] = "";
+  }
+}
+
 keys.forEach(key => {
   const button = document.createElement("button");
   button.textContent = key;
@@ -15,8 +27,6 @@ keys.forEach(key => {
   button.addEventListener("click", () => handleClick(key));
   keyboard.append(button);
 });
-
-const guesses = Array(6).fill(Array(5).fill(""));
 
 guesses.forEach((row, rowId) => {
   const rowElement = document.createElement("div");
@@ -29,42 +39,39 @@ guesses.forEach((row, rowId) => {
 });
 
 const handleClick = (letter) => {
-    console.log("clicked:", letter)
-    if(letter === "«") {
-      deleteLetter()
-      return
-    }
-    if (letter === "Enter") {
-      console.log('guess entered')
-      return
-    }
-    addLetter(letter)
-}
+  console.log("clicked:", letter);
+  if (letter === "«") {
+    deleteLetter();
+    return;
+  }
+  if (letter === "Enter") {
+    console.log('guess entered');
+    return;
+  }
+  addLetter(letter);
+};
 
-let currentRow = 0
-let currentSquare = 0
+let currentRow = 0;
+let currentSquare = 0;
 
 const addLetter = (letter) => {
-  if (currentRow < 6 && currentSquare < 5) {
+  if (currentRow < numRows && currentSquare < numColumns) {
     const square = document.getElementById(`row${currentRow}-square${currentSquare}`);
     square.textContent = letter;
     guesses[currentRow][currentSquare] = letter;
-    square.setAttribute('data', letter)
+    square.setAttribute('data', letter);
     currentSquare++;
     console.log('guessRows', guesses);
   }
-}
+};
 
 const deleteLetter = () => {
   if (currentSquare > 0) {
-    const square = document.getElementById(`row${currentRow}-square${currentSquare - 1}`);
-    square.textContent = "";
-    guesses[currentRow][currentSquare - 1] = "";
-    square.removeAttribute('data');
     currentSquare--;
+    const square = document.getElementById(`row${currentRow}-square${currentSquare}`);
+    square.textContent = "";
+    guesses[currentRow][currentSquare] = "";
+    square.removeAttribute('data');
     console.log('guessRows', guesses);
   }
-}
-
-
-
+};
