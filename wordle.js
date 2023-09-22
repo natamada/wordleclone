@@ -22,21 +22,30 @@ guesses.forEach((row, rowId) => {
 
 const handleClick = (letter) => {
     console.log("clicked:", letter)
+    if(letter === "«") {
+      console.log('delete letter')
+      return
+    }
+    if (letter === "Enter") {
+      console.log('guess entered')
+      return
+    }
     addLetter(letter)
 }
 
 let currentRow = 0
-let currentTile = 0
+let currentSquare = 0
 
 const addLetter = (letter) => {
-  if (currentRow < 6 && currentTile < 5) {
-    const squareId = `row${currentRow}-square${currentTile}`;
+  if (currentRow < 6 && currentSquare < 5) {
+    const squareId = `row${currentRow}-square${currentSquare}`;
     const square = document.getElementById(squareId);
     
     if (square) {
       square.textContent = letter;
-      guesses[currentRow][currentTile] = letter;
-      currentTile++;
+      guesses[currentRow][currentSquare] = letter;
+      square.setAttribute('data', letter)
+      currentSquare++;
       console.log('guessRows', guesses);
     }
   }
