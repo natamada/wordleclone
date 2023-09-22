@@ -8,6 +8,14 @@ const keys = [
   "Z", "X", "C", "V", "B", "N", "M", "«"
 ];
 
+keys.forEach(key => {
+  const button = document.createElement("button");
+  button.textContent = key;
+  button.id = key;
+  button.addEventListener("click", () => handleClick(key));
+  keyboard.append(button);
+});
+
 const guesses = Array(6).fill(Array(5).fill(""));
 
 guesses.forEach((row, rowId) => {
@@ -23,7 +31,7 @@ guesses.forEach((row, rowId) => {
 const handleClick = (letter) => {
     console.log("clicked:", letter)
     if(letter === "«") {
-      console.log('delete letter')
+      deleteLetter()
       return
     }
     if (letter === "Enter") {
@@ -38,24 +46,25 @@ let currentSquare = 0
 
 const addLetter = (letter) => {
   if (currentRow < 6 && currentSquare < 5) {
-    const squareId = `row${currentRow}-square${currentSquare}`;
-    const square = document.getElementById(squareId);
-    
-    if (square) {
-      square.textContent = letter;
-      guesses[currentRow][currentSquare] = letter;
-      square.setAttribute('data', letter)
-      currentSquare++;
-      console.log('guessRows', guesses);
-    }
+    const square = document.getElementById(`row${currentRow}-square${currentSquare}`);
+    square.textContent = letter;
+    guesses[currentRow][currentSquare] = letter;
+    square.setAttribute('data', letter)
+    currentSquare++;
+    console.log('guessRows', guesses);
   }
 }
 
-keys.forEach(key => {
-  const button = document.createElement("button");
-  button.textContent = key;
-  button.id = key;
-  button.addEventListener("click", () => handleClick(key));
-  keyboard.append(button);
-});
+const deleteLetter = () => {
+  if (currentSquare > 0) {
+    const square = document.getElementById(`row${currentRow}-square${currentSquare - 1}`);
+    square.textContent = "";
+    guesses[currentRow][currentSquare - 1] = "";
+    square.removeAttribute('data');
+    currentSquare--;
+    console.log('guessRows', guesses);
+  }
+}
+
+
 
