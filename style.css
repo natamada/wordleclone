@@ -16,24 +16,26 @@ body {
 }
 
 .container {
-    background-color: #474c53;
+    background-color: #24272b;
     height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding-top: 5px;
+    padding-top: 10px;
     border-radius: 5px;
     overflow: hidden;
     flex-wrap: wrap;
 }
 
 .title {
+    /* background-color: yellow; */
     text-align: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 1px; */
 }
 
 .keys {
+    /* background-color: red; */
     width: 100%;
     max-width: 510px;
     display: flex;
@@ -50,17 +52,18 @@ body {
 }
 
 .keys button:nth-child(11) {
-    margin-left: 28px;
+    margin-left: 20px;
 }
 
 .keys button:nth-child(20),
 .keys button:nth-child(28) {
-    width: 70px;
+    width: 60px;
 }
 
 .squares {
+    /* background-color: blue; */
     width: 100%;
-    max-width: 350px;
+    max-width: 330px;
     margin-bottom: 10px;
 }
 

@@ -20,7 +20,27 @@ guesses.forEach((row, rowId) => {
   squares.append(rowElement);
 });
 
-const handleClick = key => console.log("clicked:", key);
+const handleClick = (letter) => {
+    console.log("clicked:", letter)
+    addLetter(letter)
+}
+
+let currentRow = 0
+let currentTile = 0
+
+const addLetter = (letter) => {
+  if (currentRow < 6 && currentTile < 5) {
+    const squareId = `row${currentRow}-square${currentTile}`;
+    const square = document.getElementById(squareId);
+    
+    if (square) {
+      square.textContent = letter;
+      guesses[currentRow][currentTile] = letter;
+      currentTile++;
+      console.log('guessRows', guesses);
+    }
+  }
+}
 
 keys.forEach(key => {
   const button = document.createElement("button");
