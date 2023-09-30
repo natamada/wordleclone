@@ -1,6 +1,8 @@
-const answer = "SCARY";
 const squares = document.querySelector(".squares");
 const keyboard = document.querySelector(".keys");
+const messageDisplay = document.querySelector('.gamemessage')
+
+let wordle = 'SCARY'
 
 const keys = [
   "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -45,6 +47,7 @@ const handleClick = (letter) => {
     return;
   }
   if (letter === "Enter") {
+    checkRow()
     console.log('guess entered');
     return;
   }
@@ -75,3 +78,20 @@ const deleteLetter = () => {
     console.log('guessRows', guesses);
   }
 };
+
+const checkRow = () => {
+  const guess = guesses[currentRow].join('')
+  if (currentSquare === 5) {
+    console.log('guess is: ' + guess, 'wordle is: ' + wordle)
+    if (wordle == guess) {
+      showMessage("You guessed the wordle!")
+    }
+  }
+}
+
+const showMessage = (message) => {
+  const gameMessage = document.createElement('p')
+  gameMessage.textContent = message
+  messageDisplay.append(message)
+  setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
+}

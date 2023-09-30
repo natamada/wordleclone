@@ -81,3 +81,14 @@ body {
     align-items: center;
     margin: 2px;
 }
+
+.gamemessage {
+    height: px;
+}
+
+.gamemessage p {
+    background-color: #24272b;
+    border-radius: 18px;
+    padding: 10px;
+    margin: 0;
+}
