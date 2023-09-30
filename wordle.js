@@ -56,6 +56,7 @@ const handleClick = (letter) => {
 
 let currentRow = 0;
 let currentSquare = 0;
+let isGameOver = false
 
 const addLetter = (letter) => {
   if (currentRow < numRows && currentSquare < numColumns) {
@@ -85,6 +86,18 @@ const checkRow = () => {
     console.log('guess is: ' + guess, 'wordle is: ' + wordle)
     if (wordle == guess) {
       showMessage("You guessed the wordle!")
+      isGameOver = true
+      return
+    } else {
+      if (currentRow >= 5) {
+        isGameOver = true
+        showMessage('Game Over')
+        return
+      }
+      if (currentRow < 5) {
+        currentRow++
+        currentSquare = 0
+      }
     }
   }
 }
