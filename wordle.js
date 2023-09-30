@@ -92,6 +92,6 @@ const checkRow = () => {
 const showMessage = (message) => {
   const gameMessage = document.createElement('p')
   gameMessage.textContent = message
-  messageDisplay.append(message)
-  setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
+  messageDisplay.append(gameMessage)
+  setTimeout(() => messageDisplay.removeChild(gameMessage), 2000)
 }
