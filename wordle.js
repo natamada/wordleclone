@@ -2,7 +2,7 @@ const squares = document.querySelector(".squares");
 const keyboard = document.querySelector(".keys");
 const messageDisplay = document.querySelector('.gamemessage')
 
-let wordle = 'SCARY'
+let wordle = 'SCARS'
 
 const keys = [
   "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -107,29 +107,57 @@ const showMessage = (message) => {
   setTimeout(() => messageDisplay.removeChild(gameMessage), 2000)
 }
 
-const addColorToKey = (letter, color) => {
-  const key = document.getElementById(letter)
+const addColorToKey = (keyLetter, color) => {
+  const key = document.getElementById(keyLetter)
   key.classList.add(color)
 }
 
 const flipSquare = () => {
   const rowSquares = document.getElementById(`row${currentRow}`).querySelectorAll('.square');
+  let checkWordle = wordle
+  const guess = []
 
+  rowSquares.forEach(square => {
+    guess.push({ letter: square.getAttribute('data'), color: 'grey'})
+  })
+
+  
+  guess.forEach(guess =>{
+    if (checkWordle.includes(guess.letter)) {
+      guess.color = 'yellow'
+      checkWordle = checkWordle.replace(guess.letter, '')
+    }
+  })
+  
+  guess.forEach((guess, index) => {
+    if (guess.letter == wordle[index]) {
+      guess.color = 'green'
+      checkWordle = checkWordle.replace(guess.letter, '')
+    }
+  })
+  
   rowSquares.forEach((square, index) => {
-    const dataLetter = square.getAttribute('data');
-    
     setTimeout(() => {
       square.classList.add('flip')
-      if (dataLetter == wordle[index]) {
-        square.classList.add('green');
-        addColorToKey(dataLetter, 'green')
-      } else if (wordle.includes(dataLetter)) {
-        square.classList.add('yellow');
-        addColorToKey(dataLetter, 'yellow')
-      } else {
-        square.classList.add('grey');
-        addColorToKey(dataLetter, 'grey')
-      }
+      square.classList.add(guess[index].color)
+      addColorToKey(guess[index].letter, guess[index].color)
     }, 500 * index);
-  });
+  })
+  
+  // rowSquares.forEach((square, index) => {
+  //   const dataLetter = square.getAttribute('data');  
+  //   setTimeout(() => {
+  //     square.classList.add('flip')
+  //     if (dataLetter == wordle[index]) {
+  //       square.classList.add('green');
+  //       addColorToKey(dataLetter, 'green')
+  //     } else if (wordle.includes(dataLetter)) {
+  //       square.classList.add('yellow');
+  //       addColorToKey(dataLetter, 'yellow')
+  //     } else {
+  //       square.classList.add('grey');
+  //       addColorToKey(dataLetter, 'grey')
+  //     }
+  //   }, 500 * index);
+  // });
 };
