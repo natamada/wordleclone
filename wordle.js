@@ -47,7 +47,6 @@ const handleClick = (letter) => {
   }
   if (letter === "Enter") {
     checkRow()
-    console.log('guess entered');
     return;
   }
   addLetter(letter);
@@ -80,7 +79,6 @@ const deleteLetter = () => {
 const checkRow = () => {
   const guess = guesses[currentRow].join('')
   if (currentSquare > 4) {
-    console.log('guess is: ' + guess, 'wordle is: ' + wordle)
     flipSquare()
     if (wordle == guess) {
       showMessage("You guessed the wordle!")
@@ -104,7 +102,7 @@ const showMessage = (message) => {
   const gameMessage = document.createElement('p')
   gameMessage.textContent = message
   messageDisplay.append(gameMessage)
-  setTimeout(() => messageDisplay.removeChild(gameMessage), 2000)
+  setTimeout(() => messageDisplay.removeChild(gameMessage), 3000)
 }
 
 const addColorToKey = (keyLetter, color) => {
@@ -121,7 +119,6 @@ const flipSquare = () => {
     guess.push({ letter: square.getAttribute('data'), color: 'grey'})
   })
 
-  
   guess.forEach(guess =>{
     if (checkWordle.includes(guess.letter)) {
       guess.color = 'yellow'
@@ -135,7 +132,7 @@ const flipSquare = () => {
       checkWordle = checkWordle.replace(guess.letter, '')
     }
   })
-  
+
   rowSquares.forEach((square, index) => {
     setTimeout(() => {
       square.classList.add('flip')
@@ -143,21 +140,4 @@ const flipSquare = () => {
       addColorToKey(guess[index].letter, guess[index].color)
     }, 500 * index);
   })
-  
-  // rowSquares.forEach((square, index) => {
-  //   const dataLetter = square.getAttribute('data');  
-  //   setTimeout(() => {
-  //     square.classList.add('flip')
-  //     if (dataLetter == wordle[index]) {
-  //       square.classList.add('green');
-  //       addColorToKey(dataLetter, 'green')
-  //     } else if (wordle.includes(dataLetter)) {
-  //       square.classList.add('yellow');
-  //       addColorToKey(dataLetter, 'yellow')
-  //     } else {
-  //       square.classList.add('grey');
-  //       addColorToKey(dataLetter, 'grey')
-  //     }
-  //   }, 500 * index);
-  // });
 };

@@ -29,13 +29,10 @@ body {
 }
 
 .title {
-    /* background-color: yellow; */
     text-align: center;
-    /* margin-bottom: 1px; */
 }
 
 .keys {
-    /* background-color: red; */
     width: 100%;
     max-width: 510px;
     display: flex;
@@ -51,17 +48,16 @@ body {
     border-radius: 5px;
 }
 
-.keys button:nth-child(11) {
+#Enter {
     margin-left: 20px;
 }
 
-.keys button:nth-child(20),
-.keys button:nth-child(28) {
-    width: 60px;
+#Enter,
+#« {
+    width: 58px;
 }
 
 .squares {
-    /* background-color: blue; */
     width: 100%;
     max-width: 330px;
     margin-bottom: 10px;
