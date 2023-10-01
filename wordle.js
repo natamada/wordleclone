@@ -107,17 +107,29 @@ const showMessage = (message) => {
   setTimeout(() => messageDisplay.removeChild(gameMessage), 2000)
 }
 
+const addColorToKey = (letter, color) => {
+  const key = document.getElementById(letter)
+  key.classList.add(color)
+}
+
 const flipSquare = () => {
   const rowSquares = document.getElementById(`row${currentRow}`).querySelectorAll('.square');
+
   rowSquares.forEach((square, index) => {
     const dataLetter = square.getAttribute('data');
     
-    if (dataLetter == wordle[index]) {
-      square.classList.add('green');
-    } else if (wordle.includes(dataLetter)) {
-      square.classList.add('yellow');
-    } else {
-      square.classList.add('grey');
-    }
+    setTimeout(() => {
+      square.classList.add('flip')
+      if (dataLetter == wordle[index]) {
+        square.classList.add('green');
+        addColorToKey(dataLetter, 'green')
+      } else if (wordle.includes(dataLetter)) {
+        square.classList.add('yellow');
+        addColorToKey(dataLetter, 'yellow')
+      } else {
+        square.classList.add('grey');
+        addColorToKey(dataLetter, 'grey')
+      }
+    }, 500 * index);
   });
 };
