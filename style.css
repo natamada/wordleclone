@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-    background-color: #24272b;
+    background-color: rgb(32, 32, 31);
     height: 95vh;
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@ body {
 }
 
 .keys button {
-    background-color: #DCC7AA;
+    background-color: #ecebe9;
     margin: 4px;
     height: 40px;
     width: 40px;
@@ -74,7 +74,7 @@ body {
 .square {
     flex: 1;
     height: 50px;
-    border: 2px solid #3a3a3c;
+    border: 2px solid #4c4c50;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -91,4 +91,19 @@ body {
     border-radius: 18px;
     padding: 10px;
     margin: 0;
+}
+
+.green {
+    background-color: #2ca01a !important;
+    border: none !important;
+}
+
+.yellow {
+    background-color: #e6c329 !important;
+    border: none !important;
+}
+
+.grey {
+    background-color: #4c4c50 !important;
+    border: none !important;
 }

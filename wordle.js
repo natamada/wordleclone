@@ -41,7 +41,6 @@ guesses.forEach((row, rowId) => {
 });
 
 const handleClick = (letter) => {
-  console.log("clicked:", letter);
   if (letter === "«") {
     deleteLetter();
     return;
@@ -65,7 +64,6 @@ const addLetter = (letter) => {
     guesses[currentRow][currentSquare] = letter;
     square.setAttribute('data', letter);
     currentSquare++;
-    console.log('guessRows', guesses);
   }
 };
 
@@ -76,14 +74,14 @@ const deleteLetter = () => {
     square.textContent = "";
     guesses[currentRow][currentSquare] = "";
     square.removeAttribute('data');
-    console.log('guessRows', guesses);
   }
 };
 
 const checkRow = () => {
   const guess = guesses[currentRow].join('')
-  if (currentSquare === 5) {
+  if (currentSquare > 4) {
     console.log('guess is: ' + guess, 'wordle is: ' + wordle)
+    flipSquare()
     if (wordle == guess) {
       showMessage("You guessed the wordle!")
       isGameOver = true
@@ -108,3 +106,18 @@ const showMessage = (message) => {
   messageDisplay.append(gameMessage)
   setTimeout(() => messageDisplay.removeChild(gameMessage), 2000)
 }
+
+const flipSquare = () => {
+  const rowSquares = document.getElementById(`row${currentRow}`).querySelectorAll('.square');
+  rowSquares.forEach((square, index) => {
+    const dataLetter = square.getAttribute('data');
+    
+    if (dataLetter == wordle[index]) {
+      square.classList.add('green');
+    } else if (wordle.includes(dataLetter)) {
+      square.classList.add('yellow');
+    } else {
+      square.classList.add('grey');
+    }
+  });
+};
