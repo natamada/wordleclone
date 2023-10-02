@@ -1,9 +1,11 @@
+// DOM element selection
 const squares = document.querySelector(".squares");
 const keyboard = document.querySelector(".keys");
 const messageDisplay = document.querySelector('.gamemessage')
 
-let wordle; // Declare the variable for the winning word
+let wordle; // Variable for the winning word
 
+// Fetch the wordle from the server
 const getWordle = async () => {
   try {
     const response = await fetch('http://localhost:8000/word');
@@ -18,16 +20,16 @@ const getWordle = async () => {
   }
 }
 
-const keys = [
-  "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
-  "A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter",
-  "Z", "X", "C", "V", "B", "N", "M", "«"
-];
-
+// Keyboard keys and game parameters
+const keys = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter", "Z", "X", "C", "V", "B", "N", "M", "«"];
 const numRows = 6;
 const numColumns = 5;
-
 const guesses = Array.from({ length: numRows }, () => Array(numColumns).fill(""));
+
+// Game state
+let currentRow = 0;
+let currentSquare = 0;
+let isGameOver = false;
 
 const handleClick = (letter) => {
   if (letter === "«") {
@@ -39,10 +41,7 @@ const handleClick = (letter) => {
   }
 };
 
-let currentRow = 0;
-let currentSquare = 0;
-let isGameOver = false;
-
+// Functions for handling user input
 const addLetter = (letter) => {
   if (currentRow < numRows && currentSquare < numColumns) {
     const square = document.getElementById(`row${currentRow}-square${currentSquare}`);
@@ -82,6 +81,7 @@ const checkRow = () => {
   }
 };
 
+// Display a message
 const showMessage = (message) => {
   const gameMessage = document.createElement('p');
   gameMessage.textContent = message;
@@ -89,6 +89,7 @@ const showMessage = (message) => {
   setTimeout(() => messageDisplay.removeChild(gameMessage), 3000);
 };
 
+// Add color to keyboard keys
 const addColorToKey = (keyLetter, color) => {
   const key = document.getElementById(keyLetter);
   key.classList.add(color);
@@ -130,6 +131,7 @@ const flipSquare = () => {
 // Initialize the game
 getWordle();
 
+// Create keyboard buttons
 keys.forEach(key => {
   const button = document.createElement("button");
   button.textContent = key;
@@ -138,6 +140,7 @@ keys.forEach(key => {
   keyboard.append(button);
 });
 
+// Create game board squares
 guesses.forEach((row, rowId) => {
   const rowElement = document.createElement("div");
   rowElement.id = `row${rowId}`;

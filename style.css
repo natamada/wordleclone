@@ -79,7 +79,7 @@ body {
 }
 
 .gamemessage {
-    height: px;
+    height: 50px;
 }
 
 .gamemessage p {
@@ -89,13 +89,13 @@ body {
     margin: 0;
 }
 
-.green {
-    background-color: #2ca01a !important;
+.yellow {
+    background-color: #e6c329 !important;
     border: none !important;
 }
 
-.yellow {
-    background-color: #e6c329 !important;
+.green {
+    background-color: #2ca01a !important;
     border: none !important;
 }
 
@@ -104,10 +104,12 @@ body {
     border: none !important;
 }
 
+/* Styles for a square with the "flip" class */
 .square.flip {
     animation: 0.5s linear flipping;
 }
 
+/* Keyframe animation for flipping squares */
 @keyframes flipping {
     0% {
         transform: rotateX(0deg);
