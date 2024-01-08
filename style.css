@@ -5,9 +5,9 @@
 }
 
 body {
-    background: rgb(32, 32, 31);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
-    color: white;
+    background: #fff;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #000;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-    background-color: rgb(32, 32, 31);
+    background-color: #fff;
     height: 95vh;
     display: flex;
     flex-direction: column;
@@ -40,21 +40,28 @@ body {
     justify-content: center;
 }
 
-.keys button {
+.keys button  {
     background-color: #ecebe9;
     margin: 4px;
-    height: 40px;
+    height: 50px;
     width: 40px;
     border-radius: 5px;
+    border-width: 0;
+    border-color: #ecebe9;
 }
 
 #Enter {
     margin-left: 20px;
 }
 
+#巜 {
+    margin-right: 20px;
+}
+
 #Enter,
 #巜 {
-    width: 58px;
+    width: 56px;
+
 }
 
 .squares {
@@ -68,40 +75,42 @@ body {
 }
 
 .square {
+    display: flex;
     flex: 1;
     height: 50px;
-    border: 2px solid #4c4c50;
-    box-sizing: border-box;
-    display: flex;
+    font-weight: bold;
+    border: 2px solid #dbdbdb;
+    border-radius: 2px;
     justify-content: center;
     align-items: center;
     margin: 2px;
 }
 
 .gamemessage {
-    height: 20px;
-}
-
-.gamemessage p {
-    background-color: #24272b;
-    border-radius: 18px;
-    padding: 10px;
+    height: 15px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    padding: 5px;
     margin: 0;
 }
 
 .yellow {
-    background-color: #e6c329 !important;
+    background-color: #c8b653 !important;
     border: none !important;
+    color: #fff;
 }
 
 .green {
-    background-color: #2ca01a !important;
+    background-color: #6ca965 !important;
     border: none !important;
+    color: #fff;
 }
 
 .grey {
-    background-color: #4c4c50 !important;
+    background-color: #787c7f !important;
     border: none !important;
+    color: #fff;
 }
 
 /* Styles for a square with the "flip" class */

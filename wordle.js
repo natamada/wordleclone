@@ -63,7 +63,7 @@ let currentSquare = 0;
 let isGameOver = false;
 
 const handleClick = (letter) => {
-  if (letter === "«") {
+  if (letter === "巜") {
     deleteLetter();
   } else if (letter === "Enter") {
     checkRow();
@@ -121,7 +121,7 @@ const showMessage = (message) => {
   const gameMessage = document.createElement("p");
   gameMessage.textContent = message;
   messageDisplay.append(gameMessage);
-  setTimeout(() => messageDisplay.removeChild(gameMessage), 3000);
+  setTimeout(() => messageDisplay.removeChild(gameMessage), 2000);
 };
 
 // Add color to keyboard keys
