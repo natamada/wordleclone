@@ -1,30 +1,61 @@
 // DOM element selection
 const squares = document.querySelector(".squares");
 const keyboard = document.querySelector(".keys");
-const messageDisplay = document.querySelector('.gamemessage')
+const messageDisplay = document.querySelector(".gamemessage");
 
 let wordle; // Variable for the winning word
 
 // Fetch the wordle from the server
 const getWordle = async () => {
   try {
-    const response = await fetch('http://localhost:8000/word');
+    const response = await fetch("http://localhost:8000/word");
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response error");
     }
     const json = await response.json();
     wordle = json.toUpperCase(); // Convert to uppercase
     console.log(wordle);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
-}
+};
 
 // Keyboard keys and game parameters
-const keys = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter", "Z", "X", "C", "V", "B", "N", "M", "«"];
+const keys = [
+  "Q",
+  "W",
+  "E",
+  "R",
+  "T",
+  "Y",
+  "U",
+  "I",
+  "O",
+  "P",
+  "A",
+  "S",
+  "D",
+  "F",
+  "G",
+  "H",
+  "J",
+  "K",
+  "L",
+  "Enter",
+  "Z",
+  "X",
+  "C",
+  "V",
+  "B",
+  "N",
+  "M",
+  "巜",
+];
 const numRows = 6;
 const numColumns = 5;
-const guesses = Array.from({ length: numRows }, () => Array(numColumns).fill(""));
+const guesses = Array.from({ length: numRows }, () =>
+  Array(numColumns).fill("")
+);
 
 // Game state
 let currentRow = 0;
@@ -44,10 +75,12 @@ const handleClick = (letter) => {
 // Functions for handling user input
 const addLetter = (letter) => {
   if (currentRow < numRows && currentSquare < numColumns) {
-    const square = document.getElementById(`row${currentRow}-square${currentSquare}`);
+    const square = document.getElementById(
+      `row${currentRow}-square${currentSquare}`
+    );
     square.textContent = letter;
     guesses[currentRow][currentSquare] = letter;
-    square.setAttribute('data', letter);
+    square.setAttribute("data", letter);
     currentSquare++;
   }
 };
@@ -55,15 +88,17 @@ const addLetter = (letter) => {
 const deleteLetter = () => {
   if (currentSquare > 0) {
     currentSquare--;
-    const square = document.getElementById(`row${currentRow}-square${currentSquare}`);
+    const square = document.getElementById(
+      `row${currentRow}-square${currentSquare}`
+    );
     square.textContent = "";
     guesses[currentRow][currentSquare] = "";
-    square.removeAttribute('data');
+    square.removeAttribute("data");
   }
 };
 
 const checkRow = () => {
-  const guess = guesses[currentRow].join('');
+  const guess = guesses[currentRow].join("");
   if (currentSquare > 4) {
     flipSquare();
     if (wordle === guess) {
@@ -72,7 +107,7 @@ const checkRow = () => {
     } else {
       if (currentRow >= 5) {
         isGameOver = true;
-        showMessage('Game Over');
+        showMessage("Game Over");
       } else {
         currentRow++;
         currentSquare = 0;
@@ -83,7 +118,7 @@ const checkRow = () => {
 
 // Display a message
 const showMessage = (message) => {
-  const gameMessage = document.createElement('p');
+  const gameMessage = document.createElement("p");
   gameMessage.textContent = message;
   messageDisplay.append(gameMessage);
   setTimeout(() => messageDisplay.removeChild(gameMessage), 3000);
@@ -97,31 +132,33 @@ const addColorToKey = (keyLetter, color) => {
 
 // Animation when changing color of squares
 const flipSquare = () => {
-  const rowSquares = document.getElementById(`row${currentRow}`).querySelectorAll('.square');
+  const rowSquares = document
+    .getElementById(`row${currentRow}`)
+    .querySelectorAll(".square");
   let checkWordle = wordle;
   const guess = [];
 
-  rowSquares.forEach(square => {
-    guess.push({ letter: square.getAttribute('data'), color: 'grey' });
+  rowSquares.forEach((square) => {
+    guess.push({ letter: square.getAttribute("data"), color: "grey" });
   });
 
-  guess.forEach(guess => {
+  guess.forEach((guess) => {
     if (checkWordle.includes(guess.letter)) {
-      guess.color = 'yellow';
-      checkWordle = checkWordle.replace(guess.letter, '');
+      guess.color = "yellow";
+      checkWordle = checkWordle.replace(guess.letter, "");
     }
   });
 
   guess.forEach((guess, index) => {
     if (guess.letter === wordle[index]) {
-      guess.color = 'green';
-      checkWordle = checkWordle.replace(guess.letter, '');
+      guess.color = "green";
+      checkWordle = checkWordle.replace(guess.letter, "");
     }
   });
 
   rowSquares.forEach((square, index) => {
     setTimeout(() => {
-      square.classList.add('flip');
+      square.classList.add("flip");
       square.classList.add(guess[index].color);
       addColorToKey(guess[index].letter, guess[index].color);
     }, 500 * index);
@@ -132,7 +169,7 @@ const flipSquare = () => {
 getWordle();
 
 // Create keyboard buttons
-keys.forEach(key => {
+keys.forEach((key) => {
   const button = document.createElement("button");
   button.textContent = key;
   button.id = key;
@@ -145,8 +182,12 @@ guesses.forEach((row, rowId) => {
   const rowElement = document.createElement("div");
   rowElement.id = `row${rowId}`;
   rowElement.classList.add("row");
-  rowElement.innerHTML = row.map((_, guessId) => `
+  rowElement.innerHTML = row
+    .map(
+      (_, guessId) => `
     <div id="row${rowId}-square${guessId}" class="square"></div>
-  `).join("");
+  `
+    )
+    .join("");
   squares.append(rowElement);
 });
