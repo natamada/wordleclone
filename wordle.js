@@ -121,7 +121,7 @@ const showMessage = (message) => {
   const gameMessage = document.createElement("p");
   gameMessage.textContent = message;
   messageDisplay.append(gameMessage);
-  setTimeout(() => messageDisplay.removeChild(gameMessage), 2000);
+  setTimeout(() => messageDisplay.removeChild(gameMessage), 5000);
 };
 
 // Add color to keyboard keys

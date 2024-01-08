@@ -61,13 +61,13 @@ body {
 #Enter,
 #巜 {
     width: 56px;
-
 }
 
 .squares {
     width: 100%;
     max-width: 330px;
     margin-bottom: 10px;
+    padding-top: 10px;
 }
 
 .row {
@@ -89,10 +89,9 @@ body {
 .gamemessage {
     height: 15px;
     background-color: #fff;
-    color: #000;
-    border-radius: 4px;
+    color: fff;
+    border-color: #000;
     padding: 5px;
-    margin: 0;
 }
 
 .yellow {
